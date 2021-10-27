@@ -24,13 +24,13 @@ const getById = (req, res) => {
 };
 
 const postNew = (req, res) => {
-    const { name, age, id, talk } = req.body;
+    const { name, age, talk } = req.body;
 
     const data = fs.readFileSync(talkersJSON);
     const personJson = JSON.parse(data);
 
     const newPerson = {
-        id,
+        id: (personJson.length + 1),
         name,
         age,
         talk,
@@ -47,11 +47,13 @@ const updateById = (req, res) => {
     const { id } = req.params;
     const { name, age, talk } = req.body;
 
-    const readFile = fs.readFileSync(talkersJSON);
+    const readFile = fs.readFileSync(talkersJSON, 'utf8');
     const personJson = JSON.parse(readFile);
     const personIndex = personJson.findIndex((p) => parseInt(p.id, 10) === parseInt(id, 10));
 
-    personJson[personIndex] = { name, age, id: parseInt(id, 10), talk };
+    personJson[personIndex] = { ...personJson[personIndex], name, age, talk };
+
+    fs.writeFileSync(talkersJSON, JSON.stringify(personJson));
 
     res.status(200).json(personJson[personIndex]);
 };

@@ -47,8 +47,9 @@ router.put(
     tokenVerify,
     nameVerify,
     ageVerify,
-    rateVerify,
+    talkVerify,
     dateVerify,
+    rateVerify,
     updateById,
 );
 

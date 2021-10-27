@@ -2,7 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const { getAll, getById, postNew, updateById } = require('../controllers/talkerController');
+const {
+    getAll, getById, postNew, updateById, deleteById,
+} = require('../controllers/talkerController');
+
 const {
     ageVerify,
     dateVerify,
@@ -12,9 +15,15 @@ const {
     talkVerify,
 } = require('../middlewares');
 
-router.get('/', getAll);
+router.get(
+    '/',
+    getAll,
+);
 
-router.get('/:id', getById);
+router.get(
+    '/:id',
+    getById,
+);
 
 router.post(
     '/',
@@ -35,6 +44,12 @@ router.put(
     rateVerify,
     dateVerify,
     updateById,
+);
+
+router.delete(
+    '/:id',
+    tokenVerify,
+    deleteById,
 );
 
 module.exports = router;

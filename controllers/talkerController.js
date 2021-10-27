@@ -56,4 +56,17 @@ const updateById = (req, res) => {
     res.status(200).json(personJson[personIndex]);
 };
 
-module.exports = { getAll, getById, postNew, updateById };
+const deleteById = (req, res) => {
+    const { id } = req.params;
+
+    const readFile = fs.readFileSync(talkersJSON);
+    const personJson = JSON.parse(readFile);
+
+    const deletePerson = personJson.filter((p) => parseInt(p.id, 10) !== parseInt(id, 10));
+
+    fs.writeFileSync(talkersJSON, JSON.stringify(deletePerson));
+
+    res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
+};
+
+module.exports = { getAll, getById, postNew, updateById, deleteById };

@@ -69,4 +69,17 @@ const deleteById = (req, res) => {
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
 };
 
-module.exports = { getAll, getById, postNew, updateById, deleteById };
+const searchByQuery = (req, res) => {
+    const { q } = req.query;
+
+    const readFile = fs.readFileSync(talkersJSON);
+    const personJson = JSON.parse(readFile);
+
+    if (!req.query) return res.status(200).json(personJson);
+
+    const filteredName = personJson.filter((p) => p.name.includes(q));
+
+    res.status(200).json(filteredName);
+};
+
+module.exports = { getAll, getById, postNew, updateById, deleteById, searchByQuery };

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    getAll, getById, postNew, updateById, deleteById,
+    getAll, getById, postNew, updateById, deleteById, searchByQuery,
 } = require('../controllers/talkerController');
 
 const {
@@ -14,6 +14,12 @@ const {
     nameVerify,
     talkVerify,
 } = require('../middlewares');
+
+router.get(
+    '/search',
+    tokenVerify,
+    searchByQuery,
+);
 
 router.get(
     '/',

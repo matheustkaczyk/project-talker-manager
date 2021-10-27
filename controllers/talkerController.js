@@ -9,4 +9,16 @@ const getAll = (_req, res) => {
     res.status(200).json(jsonFile);
 };
 
-module.exports = { getAll };
+const getById = (req, res) => {
+    const { id } = req.params;
+    const data = fs.readFileSync('talker.json');
+    const personJson = JSON.parse(data);
+
+    const findPerson = personJson.find((person) => person.id === parseInt(id, 10));
+
+    if (!findPerson) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+
+    res.status(200).json(findPerson);
+};
+
+module.exports = { getAll, getById };

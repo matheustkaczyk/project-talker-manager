@@ -1,5 +1,7 @@
 Projeto desenvolvido durante o curso de desenvolvimento de software na Trybe. O objetivo foi aplicar os conhecimentos iniciais de criação de API no Nodejs com Express.
 
+Data de entrega: 27/10/2021
+
 # Habilidades
 - Realizar operações assíncronas utilizando callbacks;
 - Realizar operações assíncronas utilizando Promises;
